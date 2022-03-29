@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from '@modules/users/users.module';
+import { LoggerModule } from '@modules/logger/logger.module';
 
 @Module({
   imports: [
+    LoggerModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -13,7 +15,7 @@ import { UsersModule } from '@modules/users/users.module';
         uri: process.env.MONGODB_URI,
       }),
     }),
-    UsersModule
+    UsersModule,
   ],
 })
 export class AppModule {}

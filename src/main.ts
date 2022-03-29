@@ -9,7 +9,10 @@ import bodyParser from 'body-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: new WinstonLoggerService(),
-    bodyParser: true
+    bodyParser: true,
+    cors: {
+      origin: '*'
+    }
   });
 
   const configService = app.get(ConfigService);
