@@ -10,4 +10,8 @@ export class UsersService {
   findOne(...args) {
     return this.userModel.findOne(...args);
   }
+
+  create(...args) {
+    return this.userModel.create(...args);
+  }
 }
