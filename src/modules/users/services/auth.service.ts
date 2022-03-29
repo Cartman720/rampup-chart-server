@@ -16,8 +16,7 @@ export class AuthService {
     const isCorrect = await bcrypt.compare(password, user?.hash || '');
 
     if (isCorrect) {
-      const { hash, ...result } = user;
-      return result;
+      return user;
     }
 
     return null;
@@ -25,7 +24,7 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { username: user.username, sub: user.id };
-    
+
     return {
       token: this.jwtService.sign(payload),
     };
@@ -34,8 +33,8 @@ export class AuthService {
   async signup({ username, ...params }: SignUpDto) {
     const exists = await this.usersService.findOne({ username });
 
-    if(exists) {
-      throw new BadRequestException("Username is already taken");
+    if (exists) {
+      throw new BadRequestException('Username is already taken');
     }
 
     if (params.password !== params.confirm) {
